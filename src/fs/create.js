@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const isFileExists = async (filePath) => {
+const throwIfFileExists = async (filePath) => {
     try {
         await access(filePath)
         throw new Error('FS operation failed')
@@ -20,7 +20,7 @@ const create = async () => {
     try {
         const data = 'I am fresh and young'
         const filePath = join(__dirname, 'files', 'fresh.txt');
-        await isFileExists(filePath)
+        await throwIfFileExists(filePath)
         await writeFile(filePath, data)
     } catch (error) {
         console.log(error.message)
