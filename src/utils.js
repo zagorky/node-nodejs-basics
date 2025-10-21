@@ -1,10 +1,6 @@
 import {fileURLToPath} from "node:url";
 import {dirname} from "node:path";
-
-
-export const logger = ({message, type = 'log'}) => {
-    console[type](message)
-}
+import {cp, mkdir, readdir, rm} from "node:fs/promises";
 
 export const throwError = ({message, cause}) => {
     throw new Error(`${message} ${cause?.message}`)
@@ -15,3 +11,18 @@ export const getPathData = (path) => {
     const dirName = dirname(fileName)
     return {dirName, fileName}
 }
+
+export const copyDirectory = ({source, destination}) => cp(source, destination, {
+    recursive: true,
+    errorOnExist: true,
+    force: false
+})
+
+export const logger = ({message, type = 'log'}) => {
+    console[type](message)
+}
+export const removeFiles = ({directory}) => rm(directory, {recursive: true, force: true})
+
+export const createDirectory = ({directory}) => mkdir(directory, {recursive: true})
+
+export const readDirectory = ({directory}) => readdir(directory, {withFileTypes: true})
