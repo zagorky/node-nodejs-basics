@@ -1,6 +1,6 @@
 import {writeFile} from 'node:fs/promises'
 import {join} from 'node:path';
-import {getPathData, logger} from "../utils.js";
+import {getPathData, throwError} from "../utils.js";
 
 const data = 'I am fresh and young'
 const errorMessage = 'FS operation failed'
@@ -8,11 +8,10 @@ const {dirName} = getPathData(import.meta.url);
 const filePath = join(dirName, 'files', 'fresh.txt');
 
 const create = async () => {
-    try {
-        await writeFile(filePath, data, {flag: 'wx'})
-    } catch (error) {
-        logger({message: errorMessage, cause: error, type: 'error'})
-    }
+    writeFile(filePath, data, {flag: 'wx'}).catch((error) => throwError({
+        message: errorMessage,
+        cause: error,
+    }))
 };
 
 await create();

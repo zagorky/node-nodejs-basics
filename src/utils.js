@@ -2,14 +2,12 @@ import {fileURLToPath} from "node:url";
 import {dirname} from "node:path";
 
 
-export const logger = ({message, cause, type = 'log'}) => {
-    const errorMessage = `${message}: ${cause?.message}`
+export const logger = ({message, type = 'log'}) => {
+    console[type](message)
+}
 
-    if (type === 'error') {
-        throw new Error(errorMessage)
-    } else {
-        console[type](message)
-    }
+export const throwError = ({message, cause}) => {
+    throw new Error(`${message} ${cause?.message}`)
 }
 
 export const getPathData = (path) => {
