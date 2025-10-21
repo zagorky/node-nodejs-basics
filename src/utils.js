@@ -1,6 +1,6 @@
 import {fileURLToPath} from "node:url";
 import {dirname} from "node:path";
-import {cp, mkdir, readdir, rm} from "node:fs/promises";
+import {access, cp, mkdir, readdir, rename, rm} from "node:fs/promises";
 
 export const throwError = ({message, cause}) => {
     throw new Error(`${message} ${cause?.message}`)
@@ -17,6 +17,10 @@ export const copyDirectory = ({source, destination}) => cp(source, destination, 
     errorOnExist: true,
     force: false
 })
+
+export const renameFile = ({source, destination}) => rename(source, destination)
+
+export const isFileExists = ({path}) => access(path).then(() => true, () => false)
 
 export const logger = ({message, type = 'log'}) => {
     console[type](message)
