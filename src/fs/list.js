@@ -1,4 +1,4 @@
-import {getPathData, isFileExists, readDirectory, throwError} from "../utils.js";
+import {getPathData, isFileExists, logger, readDirectory, throwError} from "../utils.js";
 import {join} from "node:path";
 import {ERROR_MESSAGES, filesDirectory} from "../constants.js";
 
@@ -12,7 +12,7 @@ const list = async () => {
         cause: error
     }))
 
-    readDirectory({directory: filesFolderPath}).then(console.log, (error) => throwError({
+    readDirectory({directory: filesFolderPath}).then((files) => files.map(dirent => logger({message: dirent.name})), (error) => throwError({
         message: ERROR_MESSAGES.FS_OPERATION_FAILED,
         cause: error,
     }))
