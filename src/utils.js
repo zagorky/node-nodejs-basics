@@ -25,7 +25,7 @@ export const isFileExists = ({path}) => access(path).then(() => true, () => fals
 export const logger = ({message, type = 'log'}) => {
     console[type](message)
 }
-export const removeFiles = ({directory}) => rm(directory, {recursive: true, force: true})
+export const removeFiles = ({directory}) => rm(directory, {recursive: true})
 
 export const createDirectory = ({directory}) => mkdir(directory, {recursive: true})
 
