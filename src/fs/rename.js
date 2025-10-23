@@ -1,5 +1,7 @@
-import {getPathData, isFileExists, renameFile, throwError} from "../utils.js";
+import {getPathData, isFileExists, throwError} from "../utils.js";
 import {join} from "node:path";
+import {rename as renameFile} from "node:fs/promises";
+
 import {ERROR_MESSAGES, filesDirectory} from "../constants.js";
 
 
@@ -21,7 +23,7 @@ const rename = async () => {
         })
     }
 
-    renameFile({source: wrongNamePath, destination: properNamePath}).catch((error) => throwError({
+    renameFile(wrongNamePath, properNamePath).catch((error) => throwError({
         message: ERROR_MESSAGES.FS_OPERATION_FAILED,
         cause: error
     }))
