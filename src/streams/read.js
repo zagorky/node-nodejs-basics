@@ -1,4 +1,4 @@
-import {getPathData, logger, throwError} from "../utils.js";
+import {getPathData, throwError} from "../utils.js";
 import {join} from "node:path";
 import {createReadStream} from "node:fs";
 import {ERROR_MESSAGES, filesDirectory} from "../constants.js";
@@ -12,9 +12,7 @@ const read = async () => {
         .on('error', (error) => throwError({
             message: ERROR_MESSAGES.STREAM_OPERATION_FAILED,
             cause: error
-        })).on('finish', () => {
-        logger({message: 'Completed'});
-    });
+        }))
 };
 
 await read();

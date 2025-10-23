@@ -1,5 +1,5 @@
 import {createWriteStream} from "node:fs";
-import {getPathData, logger, throwError} from "../utils.js";
+import {getPathData, throwError} from "../utils.js";
 import {ERROR_MESSAGES, filesDirectory} from "../constants.js";
 import {join} from "node:path";
 
@@ -14,9 +14,6 @@ const write = async () => {
             message: ERROR_MESSAGES.STREAM_OPERATION_FAILED,
             cause: error
         }))
-        .on('finish', () => {
-            logger({message: 'Completed'});
-        });
 }
 
 await write();

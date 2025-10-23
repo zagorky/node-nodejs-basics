@@ -1,5 +1,5 @@
 import {Transform} from "node:stream";
-import {logger, throwError} from "../utils.js";
+import {throwError} from "../utils.js";
 import {ERROR_MESSAGES} from "../constants.js";
 
 const transformStream = new Transform({
@@ -17,9 +17,6 @@ const transform = async () => {
             message: ERROR_MESSAGES.STREAM_OPERATION_FAILED,
             cause: error
         }))
-        .on('finish', () => {
-            logger({message: 'Completed'});
-        });
 
 };
 
