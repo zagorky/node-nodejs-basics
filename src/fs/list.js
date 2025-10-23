@@ -8,15 +8,18 @@ const filesFolderPath = join(dirName, filesDirectory)
 
 const list = async () => {
 
-    isFileExists({path: filesFolderPath}).catch((error) => throwError({
-        message: ERROR_MESSAGES.FS_OPERATION_FAILED,
-        cause: error
-    }))
+    isFileExists({path: filesFolderPath})
+        .catch((error) => throwError({
+            message: ERROR_MESSAGES.FS_OPERATION_FAILED,
+            cause: error
+        }))
 
-    readdir(filesFolderPath, {withFileTypes: true}).then((files) => files.map(dirent => logger({message: dirent.name})), (error) => throwError({
-        message: ERROR_MESSAGES.FS_OPERATION_FAILED,
-        cause: error,
-    }))
+    readdir(filesFolderPath, {withFileTypes: true})
+        .then((files) => files.map(dirent => logger({message: dirent.name})),
+            (error) => throwError({
+                message: ERROR_MESSAGES.FS_OPERATION_FAILED,
+                cause: error,
+            }))
 };
 
 await list();
