@@ -17,7 +17,7 @@ const rename = async () => {
     if (!isSourceFileExists || isTargetFileExists) {
         throwError({
             message: ERROR_MESSAGES.FS_OPERATION_FAILED,
-            cause: new Error(`Source file doesn't exist or target file already exists`)
+            cause: new Error(`${ERROR_MESSAGES.SOURCE_FILE_DOESNT_EXIST} or ${ERROR_MESSAGES.TARGET_FILE_DOESNT_EXIST}`)
         })
     }
 
