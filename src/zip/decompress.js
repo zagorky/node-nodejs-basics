@@ -1,8 +1,23 @@
-//decompress.js - implement function that decompresses archive.gz back to the fileToCompress.txt
-// with same content as before compression using zlib and Streams API
+import {createGunzip} from "node:zlib";
+import {createReadStream, createWriteStream} from "node:fs";
+import {pipeline} from "node:stream/promises";
+import {getPathData, throwError} from "../utils.js";
+import {ERROR_MESSAGES, filesDirectory} from "../constants.js";
+import {join} from "node:path";
+
+const {dirName} = getPathData(import.meta.url)
+const outputPath = join(dirName, filesDirectory, 'fileToCompress.txt')
+const inputPath = join(dirName, filesDirectory, 'archive.gz')
 
 const decompress = async () => {
-    // Write your code here
+    try {
+        const gzip = createGunzip();
+        const source = createReadStream(inputPath)
+        const destination = createWriteStream(outputPath);
+        await pipeline(source, gzip, destination);
+    } catch (error) {
+        throwError({message: ERROR_MESSAGES.FAIL_TO_COMPRESS, cause: error})
+    }
 };
 
 await decompress();
