@@ -11,7 +11,7 @@ const fileToWritePath = join(dirName, filesDirectory, 'fileToWrite.txt')
 const write = async () => {
     process.stdout.pipe(createWriteStream(fileToWritePath))
         .on('error', (error) => throwError({
-            message: ERROR_MESSAGES.FS_OPERATION_FAILED,
+            message: ERROR_MESSAGES.STREAM_OPERATION_FAILED,
             cause: error
         }))
         .on('finish', () => {
