@@ -1,5 +1,22 @@
+import {createWriteStream} from "node:fs";
+import {getPathData, logger, throwError} from "../utils.js";
+import {ERROR_MESSAGES, filesDirectory} from "../constants.js";
+import {join} from "node:path";
+
+const {dirName} = getPathData(import.meta.url)
+
+const fileToWritePath = join(dirName, filesDirectory, 'fileToWrite.txt')
+
+
 const write = async () => {
-  // Write your code here
-};
+    process.stdout.pipe(createWriteStream(fileToWritePath))
+        .on('error', (error) => throwError({
+            message: ERROR_MESSAGES.FS_OPERATION_FAILED,
+            cause: error
+        }))
+        .on('finish', () => {
+            logger({message: 'Completed'});
+        });
+}
 
 await write();
