@@ -1,8 +1,6 @@
 import {release, version} from 'node:os';
 import {createServer as createServerHttp} from 'node:http';
 import {sep} from 'node:path';
-import FilesA from './files/a.json' with {type: 'json'};
-import FilesB from './files/b.json' with {type: 'json'};
 import {getPathData} from "../utils.js";
 import "./files/c.js";
 
@@ -10,7 +8,7 @@ const random = Math.random();
 
 const {fileName, dirName} = getPathData(import.meta.url)
 
-export const unknownObject = random > 0.5 ? FilesA : FilesB
+export const {default: unknownObject} = random > 0.5 ? await import('./files/a.json',{with: {type: 'json'}}) : await import('./files/b.json', {with: {type: 'json'}})
 
 console.log(`Release ${release()}`);
 console.log(`Version ${version()}`);
