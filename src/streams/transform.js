@@ -1,6 +1,7 @@
 import {Transform} from "node:stream";
 import {throwError} from "../utils.js";
 import {ERROR_MESSAGES} from "../constants.js";
+import {pipeline} from "node:stream/promises";
 
 const transformStream = new Transform({
     transform(chunk, encoding, callback) {
@@ -10,13 +11,14 @@ const transformStream = new Transform({
 })
 
 const transform = async () => {
-    process.stdin
-        .pipe(transformStream)
-        .pipe(process.stdout)
-        .on('error', (error) => throwError({
-            message: ERROR_MESSAGES.STREAM_OPERATION_FAILED,
-            cause: error
-        }))
+    await pipeline(
+        process.stdin,
+        transformStream,
+        process.stdout
+    ).catch((error) => throwError({
+        message: ERROR_MESSAGES.STREAM_OPERATION_FAILED,
+        cause: error
+    }));
 
 };
 
