@@ -16,8 +16,7 @@ const performCalculations = async () => {
 const service = (data) => {
     return new Promise((resolve) => {
         const worker = new Worker(workerPath, {workerData: data});
-        worker.on('message', (data) => resolve({status: 'resolved', data}));
-        worker.on('error', () => resolve({status: 'error', data: null}));
+        worker.on('message', resolve);
     })
 }
 
