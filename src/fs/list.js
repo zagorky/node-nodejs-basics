@@ -7,15 +7,16 @@ const {dirName} = getPathData(import.meta.url)
 const filesFolderPath = join(dirName, filesDirectory)
 
 const list = async () => {
-
-    isFileExists({path: filesFolderPath})
-        .catch((error) => throwError({
+    const folderExists = await isFileExists({path: filesFolderPath});
+    if (!folderExists) {
+        throwError({
             message: ERROR_MESSAGES.FS_OPERATION_FAILED,
-            cause: error
-        }))
+            cause: new Error('Files folder does not exist')
+        });
+    }
 
     readdir(filesFolderPath, {withFileTypes: true})
-        .then((files) => files.map(dirent => logger({message: dirent.name})),
+        .then((files) => logger({message: files.map(dirent => dirent.name)}),
             (error) => throwError({
                 message: ERROR_MESSAGES.FS_OPERATION_FAILED,
                 cause: error,
