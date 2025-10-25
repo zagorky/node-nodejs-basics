@@ -16,7 +16,7 @@ const decompress = async () => {
         const destination = createWriteStream(outputPath);
         await pipeline(source, gzip, destination);
     } catch (error) {
-        throwError({message: ERROR_MESSAGES.FAIL_TO_COMPRESS, cause: error})
+        throwError({message: ERROR_MESSAGES.FAIL_TO_DECOMPRESS, cause: error})
     }
 };
 
