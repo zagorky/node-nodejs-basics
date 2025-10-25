@@ -8,9 +8,7 @@ const scriptPath = join(dirName, filesDirectory, 'script.js');
 
 const spawnChildProcess = async (args) => {
     try {
-        fork(scriptPath, args, {
-            stdio: ['inherit', 'inherit', 'inherit', 'ipc']
-        });
+        fork(scriptPath, args);
     } catch (error) {
         throwError({
             message: ERROR_MESSAGES.CP_OPERATION_FAILED,
