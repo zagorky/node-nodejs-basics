@@ -9,6 +9,7 @@ const fileToReadPath = join(dirName, filesDirectory, 'fileToRead.txt')
 
 const read = async () => {
     await pipeline(createReadStream(fileToReadPath), process.stdout, {end: false})
+        .then(() => process.stdout.write('\n'))
         .catch((error) => throwError({
             message: ERROR_MESSAGES.STREAM_OPERATION_FAILED,
             cause: error
