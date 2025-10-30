@@ -1,4 +1,4 @@
-import {isRoot, parsePath} from "../utils.js";
+import {isRoot, parsePath, validateArgs} from "../utils.js";
 import {dirname} from "node:path";
 import {homedir} from 'node:os';
 import {readdir, stat} from 'node:fs/promises';
@@ -15,9 +15,7 @@ export const up = () => {
 
 /**Go to dedicated folder from current directory (path_to_directory can be relative or absolute)**/
 export const cd = async (args) => {
-    if (!args[0]) {
-        throw new Error(ERROR_MESSAGES.INVALID_INPUT);
-    }
+    validateArgs(args)
     const newPath = parsePath(args[0]);
     const stats = await stat(newPath);
     if (!stats.isDirectory()) {

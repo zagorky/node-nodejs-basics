@@ -1,5 +1,5 @@
 import {ERROR_MESSAGES} from "../constants.js";
-import {logSuccess} from "../utils.js";
+import {logSuccess, validateArgs} from "../utils.js";
 import {arch, cpus, EOL, homedir, userInfo} from "node:os";
 
 const commands = {
@@ -18,10 +18,11 @@ const commands = {
 
 /** Operating system info (prints following information in console) */
 export const os = async (args) => {
+    validateArgs(args)
     const command = args[0];
-    if (!command) throw new Error(ERROR_MESSAGES.INVALID_INPUT);
     const action = commands[command];
-    if (!action) throw new Error(ERROR_MESSAGES.INVALID_INPUT);
-
+    if (!action) {
+        throw new Error(ERROR_MESSAGES.INVALID_INPUT);
+    }
     action();
 };

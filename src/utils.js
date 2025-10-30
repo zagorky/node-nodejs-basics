@@ -1,5 +1,5 @@
 import {dirname, resolve} from "node:path";
-import {commands} from "./constants.js";
+import {commands, ERROR_MESSAGES} from "./constants.js";
 import {parseArgs, styleText} from 'node:util'
 import {cwd} from 'node:process';
 
@@ -37,3 +37,9 @@ export const isRoot = (path) => {
 export const logError = (error) => console.log(styleText(['redBright', 'dim'], error));
 
 export const logSuccess = (input) => console.log(styleText(['cyanBright', 'dim'], input));
+
+export const validateArgs = (args, count = 1) => {
+    if (!Array.isArray(args) || args.length < count || args.some(a => !a)) {
+        throw new Error(ERROR_MESSAGES.INVALID_INPUT);
+    }
+};
