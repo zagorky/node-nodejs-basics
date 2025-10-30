@@ -2,7 +2,9 @@ import {fileURLToPath} from "node:url";
 import {dirname, resolve} from "node:path";
 import {access} from "node:fs/promises";
 import {commands} from "./constants.js";
-import {parseArgs} from 'node:util'
+import {parseArgs, styleText} from 'node:util'
+import {cwd} from 'node:process';
+
 
 export const throwError = ({message, cause}) => {
     throw new Error(`${message} ${cause?.message}`)
@@ -35,12 +37,12 @@ export const parseUsername = () => {
     return values.username ?? 'Anonymous'
 }
 
-export const printCurrentDir = (currentPath) => {
-    console.log(`You are currently in ${currentPath}`);
+export const printCurrentDir = () => {
+    console.log(styleText('yellow', `You are currently in ${cwd()}`));
 };
 
-export const parsePath = (inputPath, currentPath) => {
-    return resolve(currentPath, inputPath);
+export const parsePath = (inputPath) => {
+    return resolve(cwd(), inputPath);
 };
 
 export const isRoot = (path) => {
