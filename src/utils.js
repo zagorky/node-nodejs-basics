@@ -28,7 +28,7 @@ export const parseUsername = () => {
 }
 
 export const printCurrentDir = () => {
-    console.log(styleText('yellow', `You are currently in ${cwd()}`));
+    console.log(styleText('yellowBright', `You are currently in ${cwd()}`));
 };
 
 export const parsePath = (inputPath) => {

@@ -21,7 +21,7 @@ export const startShell = async () => {
     const username = parseUsername();
 
     console.log(styleText('cyan', `Welcome to the File Manager, ${username}`));
-    console.log(styleText(['italic', 'dim', 'magentaBright'], `🧚🏼 Tap TAB to autocomplete commands`));
+    console.log(styleText(['italic', 'dim', 'magentaBright'], `🧚🏼  Tap TAB to autocomplete commands`));
     printCurrentDir();
     rl.prompt();
 
@@ -51,14 +51,17 @@ export const startShell = async () => {
         try {
             const handler = commandHandlers[cmd];
             if (handler) {
+                rl.pause();
+                console.log(styleText('blueBright', `⏳ Executing command: ${cmd} ${args.join(' ')}`));
                 await handler(args);
+                console.log(styleText('magenta', '⚡️ Command executed successfully'));
             } else if (cmd !== '') {
                 logError(ERROR_MESSAGES.INVALID_INPUT)
             }
         } catch (error) {
             logError(error.message.includes('ENOENT') ? ERROR_MESSAGES.OPERATION_FAILED : error.message);
         }
-
+        rl.resume();
         printCurrentDir();
         rl.prompt();
     });
