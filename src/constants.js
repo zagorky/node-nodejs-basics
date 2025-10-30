@@ -8,7 +8,8 @@ export const ERROR_MESSAGES = {
     FAIL_TO_DECOMPRESS: "Error decompressing file",
     CP_OPERATION_FAILED: "Error spawning child process",
     FM_OPERATION_FAILED: "Error performing file manager operation",
-    INVALID_INPUT: 'Invalid input'
+    INVALID_INPUT: 'Invalid input',
+    OPERATION_FAILED: 'Operation failed',
 }
 
 export const filesDirectory = 'files'
