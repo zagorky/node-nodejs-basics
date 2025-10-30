@@ -1,6 +1,4 @@
-import {fileURLToPath} from "node:url";
 import {dirname, resolve} from "node:path";
-import {access} from "node:fs/promises";
 import {commands} from "./constants.js";
 import {parseArgs, styleText} from 'node:util'
 import {cwd} from 'node:process';
@@ -9,14 +7,6 @@ import {cwd} from 'node:process';
 export const throwError = ({message, cause}) => {
     throw new Error(`${message} ${cause?.message}`)
 }
-
-export const getPathData = (path) => {
-    const fileName = fileURLToPath(path);
-    const dirName = dirname(fileName)
-    return {dirName, fileName}
-}
-
-export const isFileExists = ({path}) => access(path).then(() => true, () => false)
 
 export const completer = (command) => {
     const hits = commands.filter(cmd => cmd.startsWith(command));
