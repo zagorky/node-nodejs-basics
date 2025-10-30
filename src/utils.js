@@ -3,11 +3,6 @@ import {commands} from "./constants.js";
 import {parseArgs, styleText} from 'node:util'
 import {cwd} from 'node:process';
 
-
-export const throwError = ({message, cause}) => {
-    throw new Error(`${message} ${cause?.message}`)
-}
-
 export const completer = (command) => {
     const hits = commands.filter(cmd => cmd.startsWith(command));
     return [hits.length ? hits : commands, command];
@@ -39,6 +34,6 @@ export const isRoot = (path) => {
     return dirname(path) === path;
 };
 
-export const logError = (error) => console.log(styleText('red', error));
+export const logError = (error) => console.log(styleText(['redBright', 'dim'], error));
 
-export const logSuccess = (input) => console.log(styleText('cyanBright', input));
+export const logSuccess = (input) => console.log(styleText(['cyanBright', 'dim'], input));
