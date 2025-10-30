@@ -48,3 +48,7 @@ export const parsePath = (inputPath) => {
 export const isRoot = (path) => {
     return dirname(path) === path;
 };
+
+export const logError = (error) => console.log(styleText('red', error));
+
+export const logSuccess = (input) => console.log(styleText('cyanBright', input));
