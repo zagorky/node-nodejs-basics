@@ -1,5 +1,7 @@
 import {mkdir as fsMkdir, readFile, rename, rm as fsRm, writeFile} from 'node:fs/promises';
 import {cwd} from 'node:process';
+import {pipeline} from 'node:stream/promises';
+import {createReadStream, createWriteStream} from 'node:fs';
 import {dirname, join} from 'node:path';
 import {logSuccess, parsePath, validateArgs} from "../utils.js";
 
@@ -37,15 +39,17 @@ export const rm = async (args) => {
     await fsRm(parsePath(args[0]));
 };
 
-//TODO: implement with streams
 /** Copy file (should be done using Readable and Writable streams) **/
 export const cp = async (args) => {
-    validateArgs(args)
-    console.log("TODO: implement with streams");
+    validateArgs(args, 2);
+    const src = parsePath(args[0]);
+    const dest = parsePath(args[1]);
+    await pipeline(createReadStream(src), createWriteStream(dest));
 };
 
 /** Move file (same as copy but initial file is deleted, copying part should be done using Readable and Writable streams) **/
 export const mv = async (args) => {
+    validateArgs(args, 2);
     await cp(args);
     await fsRm(parsePath(args[0]));
 };
