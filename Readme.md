@@ -33,17 +33,12 @@ external dependencies.
    git checkout file-manager
    ```
 
-3. Navigate into the project directory:
-
-   ```bash
-   cd file-manager
-   ```
-4. Install dependencies (none required for this project):
+3. Install dependencies (none required for this project):
 
    ```bash
    npm install
    ```
-5. Run the program:
+4. Run the program:
 
    ```bash
    npm run start -- --username=your_username
