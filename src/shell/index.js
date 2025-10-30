@@ -21,7 +21,7 @@ export const startShell = async () => {
     const username = parseUsername();
 
     console.log(styleText('cyan', `Welcome to the File Manager, ${username}`));
-    console.log(styleText(['italic', 'gray'], `🧚🏼 Tap TAB to autocomplete commands`));
+    console.log(styleText(['italic', 'dim', 'magentaBright'], `🧚🏼 Tap TAB to autocomplete commands`));
     printCurrentDir();
     rl.prompt();
 

@@ -3,7 +3,7 @@ import {logSuccess} from "../utils.js";
 import {arch, cpus, EOL, homedir, userInfo} from 'node:os';
 
 
-/**Get EOL (default system End-Of-Line) and print it to console**/
+/**Operating system info (prints following information in console)**/
 export const os = async (args) => {
     if (!args[0]) {
         throw new Error(ERROR_MESSAGES.INVALID_INPUT);
