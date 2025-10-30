@@ -6,6 +6,7 @@ import {completer, logError, parseUsername, printCurrentDir} from "../utils.js";
 import {ERROR_MESSAGES} from "../constants.js";
 import {commandsRegistry} from "../commands/index.js";
 
+/** Starts the file manager shell. Initializes the shell environment, handles user input, and provides tab completion. **/
 export const startShell = async () => {
     chdir(homedir());
     const rl = createInterface({input: stdin, output: stdout, completer});
