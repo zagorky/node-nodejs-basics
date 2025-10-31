@@ -1,15 +1,6 @@
 import {createInterface} from "node:readline/promises";
 import {stdin, stdout} from "node:process";
-import {commandsRegistry} from "../commands/index.js";
-
-export const commands = [
-    ...Object.keys(commandsRegistry),
-    'os --EOL',
-    'os --cpus',
-    'os --homedir',
-    'os --username',
-    'os --architecture'
-];
+import {commands} from "../constants.js";
 
 /** Provides tab-autocompletion suggestions based on user input. Returns an array of possible matches or the full list if no match is found. **/
 export const completer = (command) => {

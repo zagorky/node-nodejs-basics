@@ -1,30 +1,20 @@
-import {isRoot, parsePath, validateArgs} from "../utils.js";
+import {parsePath, validateArgs} from "../utils.js";
 import {dirname} from "node:path";
-import {homedir} from 'node:os';
 import {readdir, stat} from 'node:fs/promises';
 import {chdir, cwd} from 'node:process';
-import {ERROR_MESSAGES} from "../constants.js"
 
 /**Go upper from current directory (when you are in the root folder this operation shouldn't change working directory)**/
 export const up = () => {
     const currentPath = cwd()
-    if (!isRoot(currentPath)) {
-        chdir(dirname(currentPath))
-    }
+    chdir(dirname(currentPath))
 }
 
 /**Go to dedicated folder from current directory (path_to_directory can be relative or absolute)**/
 export const cd = async (args) => {
     validateArgs(args)
     const newPath = parsePath(args[0]);
-    const stats = await stat(newPath);
-    if (!stats.isDirectory()) {
-        throw new Error(ERROR_MESSAGES.INVALID_INPUT);
-    }
-
-    if (isRoot(newPath) || newPath.startsWith(dirname(homedir()))) {
-        chdir(newPath);
-    }
+    await stat(newPath);
+    chdir(newPath);
 }
 
 /**Print in console list of all files and folders in current directory. List should contain:
