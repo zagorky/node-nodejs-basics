@@ -3,6 +3,8 @@ import {hash} from "./hash.js";
 import {compress, decompress} from "./zip.js";
 import {add, cat, cp, mkdir, mv, rm, rn} from "./file.js";
 import {os} from "./os.js";
+import {closeRL} from "../shell/readline.js";
+import {exit} from "node:process";
 
 export const commandsRegistry = {
     up,
@@ -19,4 +21,8 @@ export const commandsRegistry = {
     hash,
     compress,
     decompress,
+    ".exit": () => {
+        closeRL()
+        exit(0);
+    }
 };

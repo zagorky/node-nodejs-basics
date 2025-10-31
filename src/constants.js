@@ -12,6 +12,5 @@ export const commands = [
     'os --cpus',
     'os --homedir',
     'os --username',
-    'os --architecture',
-    '.exit',
+    'os --architecture'
 ];
