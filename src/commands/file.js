@@ -45,7 +45,6 @@ export const cp = async (args) => {
     const src = parsePath(args[0]);
     const dest = parsePath(args[1]);
     const [isSrcExist, isDestExists] = await Promise.all([isFileExists({path: src}), isFileExists({path: dest})]);
-    console.log(isSrcExist, isDestExists)
 
     if (!isSrcExist || isDestExists) {
         throw new Error(`File ${args[0]} doesn't exist or file ${args[1]} already exists`)
