@@ -1,14 +1,7 @@
 import {dirname, resolve} from "node:path";
-import {commands, ERROR_MESSAGES} from "./constants.js";
+import {ERROR_MESSAGES} from "./constants.js";
 import {parseArgs, styleText} from 'node:util'
 import {cwd} from 'node:process';
-
-/** Provides tab-autocompletion suggestions based on user input. Returns an array of possible matches or the full list if no match is found. **/
-export const completer = (command) => {
-    const hits = commands.filter(cmd => cmd.startsWith(command));
-    return [hits.length ? hits : commands, command];
-
-}
 
 /** Parses the "--username" argument from the command-line input. Returns the provided username or "Anonymous" if not specified. **/
 export const parseUsername = () => {
