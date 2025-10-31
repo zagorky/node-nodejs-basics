@@ -34,13 +34,10 @@ export const startShell = async () => {
 
                 console.log(styleText(["magenta", "dim"], "⚡️ Command executed successfully"));
             } else if (cmd) {
-                logError(ERROR_MESSAGES.INVALID_INPUT);
+                logError(`${ERROR_MESSAGES.INVALID_INPUT}: command: '${cmd}' doesn't exist`);
             }
         } catch (error) {
-            const message = error.message.includes("ENOENT")
-                ? ERROR_MESSAGES.OPERATION_FAILED
-                : error.message;
-            logError(message);
+            logError(`${ERROR_MESSAGES.OPERATION_FAILED}: ${error.message}`);
         } finally {
             resume();
             printCurrentDir();

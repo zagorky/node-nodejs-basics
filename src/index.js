@@ -8,7 +8,7 @@ export const main = async () => {
     try {
         await startShell()
     } catch (error) {
-        logError(ERROR_MESSAGES.FM_OPERATION_FAILED)
+        logError(`${ERROR_MESSAGES.FM_OPERATION_FAILED}, ${error.message}`)
         exit(1)
     }
 }
