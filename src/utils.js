@@ -2,6 +2,8 @@ import {resolve} from "node:path";
 import {ERROR_MESSAGES} from "./constants.js";
 import {parseArgs, styleText} from 'node:util'
 import {cwd} from 'node:process';
+import {access} from "node:fs/promises";
+
 
 /** Parses the "--username" argument from the command-line input. Returns the provided username or "Anonymous" if not specified. **/
 export const parseUsername = () => {
@@ -16,6 +18,10 @@ export const parseUsername = () => {
 
     return values.username ?? 'Anonymous'
 }
+
+/** Checks if a file exists at the specified path. Returns a Promise that resolves to true if the file exists, otherwise false. **/
+export const isFileExists = ({path}) => access(path).then(() => true, () => false)
+
 
 /** Prints the current working directory to the console in yellow. */
 export const printCurrentDir = () => {

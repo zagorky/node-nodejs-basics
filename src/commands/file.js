@@ -3,7 +3,7 @@ import {cwd} from 'node:process';
 import {pipeline} from 'node:stream/promises';
 import {createReadStream, createWriteStream} from 'node:fs';
 import {dirname, join} from 'node:path';
-import {logSuccess, parsePath, validateArgs} from "../utils.js";
+import {isFileExists, logSuccess, parsePath, validateArgs} from "../utils.js";
 
 /** Read file and print its content in console **/
 export const cat = async (args) => {
@@ -44,6 +44,13 @@ export const cp = async (args) => {
     validateArgs(args, 2);
     const src = parsePath(args[0]);
     const dest = parsePath(args[1]);
+    const [isSrcExist, isDestExists] = await Promise.all([isFileExists({path: src}), isFileExists({path: dest})]);
+    console.log(isSrcExist, isDestExists)
+
+    if (!isSrcExist || isDestExists) {
+        throw new Error(`File ${args[0]} doesn't exist or file ${args[1]} already exists`)
+    }
+
     await pipeline(createReadStream(src), createWriteStream(dest));
 };
 
