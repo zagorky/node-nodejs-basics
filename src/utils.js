@@ -1,4 +1,4 @@
-import {dirname, resolve} from "node:path";
+import {resolve} from "node:path";
 import {ERROR_MESSAGES} from "./constants.js";
 import {parseArgs, styleText} from 'node:util'
 import {cwd} from 'node:process';
@@ -25,11 +25,6 @@ export const printCurrentDir = () => {
 /** Resolves a given input path relative to the current working directory. Returns an absolute path.**/
 export const parsePath = (inputPath) => {
     return resolve(cwd(), inputPath);
-};
-
-/** Checks if the given path is the root directory. Returns true if it is, otherwise false. **/
-export const isRoot = (path) => {
-    return dirname(path) === path;
 };
 
 /** Logs an error message in red (dimmed) style. **/
