@@ -8,16 +8,22 @@ export const completer = (command) => {
     return [hits.length ? hits : commands, command];
 
 }
+
 const readline = createInterface({input: stdin, output: stdout, completer});
 
+/** Closes the readline interface. **/
 export const closeRL = () => readline.close();
 
+/** Prompts the user for input. **/
 export const prompt = () => readline.prompt();
 
+/** Listens for a specific event on the readline interface. **/
 export const listen = (event, callback) => {
     readline.on(event, callback)
 }
 
+/** Pauses the readline interface. **/
 export const pause = () => readline.pause();
 
+/** Resumes the readline interface. **/
 export const resume = () => readline.resume();
