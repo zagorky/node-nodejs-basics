@@ -43,6 +43,10 @@ external dependencies.
    ```bash
    npm run start -- --username=your_username
    ```
+   or
+    ```bash
+   pnpm run start --username=your_username 
+   ```
 
 ---
 

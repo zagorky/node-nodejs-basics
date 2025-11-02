@@ -31,7 +31,7 @@ export const startShell = async () => {
 
                 await handler(args);
 
-                console.log(styleText(["magenta", "dim"], "⚡️ Command executed successfully"));
+                console.log(styleText(["magentaBright", "dim"], "⚡️ Command executed successfully"));
             } else if (cmd) {
                 logError(`${ERROR_MESSAGES.INVALID_INPUT}: command: '${cmd}' doesn't exist`);
             }
