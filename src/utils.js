@@ -42,7 +42,7 @@ export const logError = (error) => console.log(styleText(['redBright', 'dim'], e
 export const logSuccess = (input) => console.log(styleText(['cyanBright', 'dim'], input));
 
 export const validateArgs = (args, count = 1) => {
-    if (!Array.isArray(args) || args.length < count || args.some(a => !a)) {
+    if (!Array.isArray(args) || args.length !== count || args.some(a => !a)) {
         throw new Error(ERROR_MESSAGES.INVALID_INPUT);
     }
 };
