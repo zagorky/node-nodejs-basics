@@ -16,7 +16,6 @@ export const osCommandsRegistry = {
     "--architecture": () => logSuccess(arch()),
 };
 
-/** Operating system info (prints following information in console) */
 export const os = async (args) => {
     validateArgs(args)
     const command = args[0];

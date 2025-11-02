@@ -1,4 +1,4 @@
-import {chdir, exit} from "node:process";
+import {chdir} from "node:process";
 import {homedir} from "node:os";
 import {styleText} from "node:util";
 import {logError, parseUsername, printCurrentDir} from "../utils.js";
@@ -6,7 +6,6 @@ import {ERROR_MESSAGES} from "../constants.js";
 import {commandsRegistry} from "../commands/index.js";
 import {listen, pause, prompt, resume} from "./readline.js";
 
-/** Starts the file manager shell. Initializes the shell environment, handles user input, and provides tab completion. **/
 export const startShell = async () => {
     chdir(homedir());
 
@@ -47,6 +46,5 @@ export const startShell = async () => {
 
     listen("close", () => {
         console.log(styleText("magentaBright", `Thank you for using File Manager, ${username}, goodbye!`));
-        exit(0);
     });
 };

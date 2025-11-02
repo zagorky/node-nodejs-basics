@@ -1,29 +1,27 @@
-import {parsePath, validateArgs} from "../utils.js";
+import {parseSrcDestPaths, throwIfFilesDontExist, validateArgs} from "../utils.js";
 import {createReadStream, createWriteStream,} from 'node:fs';
 import {createBrotliCompress, createBrotliDecompress} from 'node:zlib';
 import {pipeline} from 'node:stream/promises';
 
-/** Compress file (using Brotli algorithm, should be done using Streams API)**/
 export const compress = async (args) => {
     validateArgs(args, 2)
-    const srcFile = parsePath(args[0]);
-    const destFile = parsePath(args[1]);
+    const {src, dest} = parseSrcDestPaths(args)
+    await throwIfFilesDontExist({src, dest, args});
     await pipeline(
-        createReadStream(srcFile),
+        createReadStream(src),
         createBrotliCompress(),
-        createWriteStream(destFile),
+        createWriteStream(dest),
     );
 
 }
 
 
-/** Decompress file (using Brotli algorithm, should be done using Streams API)**/
 export const decompress = async (args) => {
     validateArgs(args, 2)
-    const srcFile = parsePath(args[0]);
-    const destFile = parsePath(args[1]);
+    const {src, dest} = parseSrcDestPaths(args)
+    await throwIfFilesDontExist({src, dest, args});
     await pipeline(
-        createReadStream(srcFile),
+        createReadStream(src),
         createBrotliDecompress(),
-        createWriteStream(destFile));
+        createWriteStream(dest));
 }

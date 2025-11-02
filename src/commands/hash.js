@@ -2,7 +2,6 @@ import {createHash} from "node:crypto";
 import {createReadStream} from 'node:fs'
 import {logSuccess, parsePath, validateArgs} from "../utils.js";
 
-/**Calculate hash for file and print it into console**/
 export const hash = async (args) => {
     validateArgs(args)
     const hashPath = parsePath(args[0]);

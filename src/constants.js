@@ -6,7 +6,6 @@ export const ERROR_MESSAGES = {
     OPERATION_FAILED: 'Operation failed',
 }
 
-
 export const commands = [
     ...Object.keys(commandsRegistry),
     'os --EOL',
